@@ -68,10 +68,10 @@
   <div class="deadlines">
     <h2>⏰ 截止日總覽</h2>
     <ul>
-      <li><b>11/18（三）</b>哥哥【FET】：Vocabulary Workbook pp.44–45</li>
-      <li><b>11/19（四）</b>弟弟【CET】：Vocabulary Worksheet ×1</li>
-      <li><b>11/22（日）</b>哥哥【FET】：NRI 完成</li>
-      <li><b>11/23（一）</b>哥哥【FET】：LAW pp.22–23、myON 本週 1 小時＋AR 測驗（目標 30%）</li>
+      <li><b>11/18（三）</b>哥哥【FET】：Vocabulary Workbook pp.44-45 (due Wednesday)</li>
+      <li><b>11/22（日）</b>哥哥【FET】：NRI complete for 11/22</li>
+      <li><b>11/23（一）</b>哥哥【FET】：LAW pp. 22-23 (due next Monday)</li>
+      <li><b>11/23（一）</b>哥哥【FET】：myON Reading - Read 1 hour a week and do AR quizzes-Goal: 30% by next Monday</li>
     </ul>
   </div>
 
@@ -84,37 +84,20 @@
 const BIG = "哥哥", SMALL = "弟弟";
 const CLS = { [BIG]: "FET", [SMALL]: "CET" };
 const DAYS = [
-  { date: "2026-11-16", label: "11/16（一）", time: "晚上 7:30", tasks: [
-    [SMALL, "Conventions Workbook pp.27–29"],
-    [BIG, "Vocabulary Workbook pp.44–45 先寫一半", "週三交"],
-    [BIG, "myON 閱讀 15 分鐘"],
+  { date: "2026-11-16", label: "11/16（一）", tasks: [
+    [SMALL, "Conventions Workbook pp.27-29"],
+    [BIG, "myON Reading - Read 1 hour a week and do AR quizzes-Goal: 30% by next Monday"],
+    [BIG, "Review - Reader in MyView 5, U1-2, pp.258-275"],
+    [BIG, "Vocabulary Workbook pp.44-45 (due Wednesday)"],
+    [BIG, "LAW pp. 22-23 (due next Monday)"],
+    [BIG, "NRI complete for 11/22"],
   ]},
-  { date: "2026-11-17", label: "11/17（二）", time: "晚上 7:30", warn: true, tasks: [
-    [BIG, "Vocabulary Workbook pp.44–45 寫完", "明天交"],
-    [BIG, "myON 閱讀 15 分鐘"],
-  ]},
-  { date: "2026-11-18", label: "11/18（三）", time: "晚上 7:30", tasks: [
-    [BIG, "LAW pp.22–23", "下週一交"],
-    [BIG, "myON 閱讀 15 分鐘"],
-  ]},
-  { date: "2026-11-19", label: "11/19（四）", time: "晚上 7:30", tasks: [
-    [SMALL, "Vocabulary Worksheet 一張"],
-    [BIG, "複習 MyView 5 Reader U1–2 pp.258–275"],
-    [BIG, "myON 閱讀 15 分鐘"],
-  ]},
-  { date: "2026-11-20", label: "11/20（五）", time: "晚上 7:30", tasks: [
-    [BIG, "開始寫 NRI", "11/22 前完成"],
-  ]},
-  { date: "2026-11-21", label: "11/21（六）", time: "早上 10:00", tasks: [
-    [BIG, "NRI 寫完"],
-    [BIG, "myON 補滿本週 1 小時＋做 AR 測驗", "目標 30%"],
-  ]},
-  { date: "2026-11-22", label: "11/22（日）", time: "晚上 7:30", warn: true, tasks: [
-    [BIG, "檢查週一要交：LAW、NRI、myON 30%"],
+  { date: "2026-11-19", label: "11/19（四）", tasks: [
+    [SMALL, "Vocabulary Worksheet*1"],
   ]},
 ];
 
-const KEY = "hw-2026-11-16-v2";
+const KEY = "hw-2026-11-16-v3";
 let state = {};
 try { state = JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) {}
 function save() { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} }
@@ -136,7 +119,7 @@ function render() {
     let badges = "";
     if (d.date === today) badges += '<span class="badge today">今天</span>';
     if (d.warn) badges += '<span class="badge warn">交件前一天</span>';
-    card.innerHTML = `<div class="dhead"><span class="date">${d.label}${badges}</span><span class="time">⏰ ${d.time}</span></div>`;
+    card.innerHTML = `<div class="dhead"><span class="date">${d.label}${badges}</span></div>`;
 
     [BIG, SMALL].forEach(kid => {
       const items = d.tasks.map((t, ti) => ({ t, ti })).filter(x => x.t[0] === kid);
