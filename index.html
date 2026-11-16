@@ -61,17 +61,17 @@
 <body>
 <div class="wrap">
   <h1>📚 本週作業提醒</h1>
-  <p class="sub">2026/11/16（一）– 11/22（日）・哥哥 FET／弟弟 CET</p>
+  <p class="sub">2026/11/16（一）– 11/22（日）・哥哥【FET】／弟弟【CET】</p>
   <div class="progress"><div id="bar"></div></div>
   <div class="ptext" id="ptext"></div>
 
   <div class="deadlines">
     <h2>⏰ 截止日總覽</h2>
     <ul>
-      <li><b>11/17（二）</b>弟弟：Vocabulary Worksheet ×1</li>
-      <li><b>11/18（三）</b>哥哥：Vocabulary Workbook pp.44–45</li>
-      <li><b>11/22（日）</b>哥哥：NRI 完成</li>
-      <li><b>11/23（一）</b>哥哥：LAW pp.22–23、myON 本週 1 小時＋AR 測驗（目標 30%）</li>
+      <li><b>11/17（二）</b>弟弟【CET】：Vocabulary Worksheet ×1</li>
+      <li><b>11/18（三）</b>哥哥【FET】：Vocabulary Workbook pp.44–45</li>
+      <li><b>11/22（日）</b>哥哥【FET】：NRI 完成</li>
+      <li><b>11/23（一）</b>哥哥【FET】：LAW pp.22–23、myON 本週 1 小時＋AR 測驗（目標 30%）</li>
     </ul>
   </div>
 
@@ -82,6 +82,7 @@
 
 <script>
 const BIG = "哥哥", SMALL = "弟弟";
+const CLS = { [BIG]: "FET", [SMALL]: "CET" };
 const DAYS = [
   { date: "2026-11-16", label: "11/16（一）", time: "晚上 7:30", tasks: [
     [SMALL, "Conventions Workbook pp.27–29"],
@@ -146,7 +147,7 @@ function render() {
       if (!items.length) return;
       const box = document.createElement("div");
       box.className = "kid";
-      box.innerHTML = `<span class="kname ${kid === BIG ? "big" : "small"}">${kid}</span>`;
+      box.innerHTML = `<span class="kname ${kid === BIG ? "big" : "small"}">${kid}・${CLS[kid]}</span>`;
       items.forEach(({ t, ti }) => {
         const id = di + "-" + ti;
         total++; if (state[id]) done++;
